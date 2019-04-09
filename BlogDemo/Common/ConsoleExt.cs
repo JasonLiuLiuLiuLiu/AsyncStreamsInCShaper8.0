@@ -12,7 +12,7 @@ namespace Common
 
         private static string GetCurrentTimeAndThreadId()
         {
-            return $"(Time:{DateTime.Now},Thread:{Thread.CurrentThread.ManagedThreadId}):";
+            return $"(Time:{DateTime.Now.ToString("hh:mm:ss.ffffff")},Thread:{Thread.CurrentThread.ManagedThreadId}):";
         }
     }
 }

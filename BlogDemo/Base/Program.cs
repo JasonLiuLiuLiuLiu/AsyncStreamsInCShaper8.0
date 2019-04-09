@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 
 namespace Base
 {
@@ -6,8 +7,24 @@ namespace Base
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            
+            const int count = 5;
+            ConsoleExt.WriteLine($"Starting the application with count: {count}!");
+            ConsoleExt.WriteLine("Classic sum starting.");
+            ConsoleExt.WriteLine($"Classic sum result: {SumFromOneToCount(count)}");
+            ConsoleExt.WriteLine("Classic sum completed.");
+            ConsoleExt.WriteLine("################################################");
+        }
+
+        static int SumFromOneToCount(int count)
+        {
+            ConsoleExt.WriteLine("SumFromOneToCount called!");
+
+            var sum = 0;
+            for (var i = 0; i <= count; i++)
+            {
+                sum = sum + i;
+            }
+            return sum;
         }
     }
 }
