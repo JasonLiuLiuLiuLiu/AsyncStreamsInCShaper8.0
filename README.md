@@ -1,7 +1,7 @@
 # AsyncStreamsInCShaper8.0
 
 很开心今天能与大家一起聊聊C# 8.0中的新特性-`Async Stream`,如果你通道这个词表情是这样.  
-![Drag Racing](https://raw.githubusercontent.com/liuzhenyulive/AsyncStreamsInCShaper8.0/master/Pic/mengbi.jpg)  
+![Drag Racing](https://raw.githubusercontent.com/liuzhenyulive/AsyncStreamsInCShaper8.0/master/Pic/mengbi.jpg =100x)  
 那我说,其实就是C# 8.0中支持`await foreach`了呢?  
 ![Drag Racing](https://raw.githubusercontent.com/liuzhenyulive/AsyncStreamsInCShaper8.0/master/Pic/mengbi2.jpg)  
 ![Drag Racing](https://raw.githubusercontent.com/liuzhenyulive/AsyncStreamsInCShaper8.0/master/Pic/mengbi3.jpeg)  
