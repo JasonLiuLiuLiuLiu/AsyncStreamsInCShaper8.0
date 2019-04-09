@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Common
 {
@@ -8,6 +9,11 @@ namespace Common
         public static void WriteLine(string message)
         {
             Console.WriteLine(GetCurrentTimeAndThreadId() + message);
+        }
+
+        public static async void WriteLineAsync(string message)
+        {
+            await Task.Run(() => Console.WriteLine(GetCurrentTimeAndThreadId() + message));
         }
 
         private static string GetCurrentTimeAndThreadId()
