@@ -147,7 +147,7 @@ static async Task Main(string[] args)
 
 <img src="https://github.com/liuzhenyulive/AsyncStreamsInCShaper8.0/raw/master/Pic/AsyncReturn.png" width="1000" height="200"/>  
 
-我们可以看到计算过程是在另一个线程中运行，但结果仍然是作为一个值返回！
+我们可以看到计算过程是在另一个线程中运行，但结果仍然是作为一个值返回！任然不完美.  
 
 如果我们想把惰性枚举（yield return）与异步方法结合起来,即返回Task<IEnumerable<T>,这怎么实现呢?
 
@@ -247,7 +247,7 @@ static async Task ConsumeAsyncSumSeqeunc(IAsyncEnumerable<int> sequence)
 <img src="https://github.com/liuzhenyulive/AsyncStreamsInCShaper8.0/raw/master/Pic/AsyncStream.png" width="1000" height="300"/> 
 
 最后,看到这就是我们想要的结果,在枚举的基础上,进行了异步迭代.  
-可以看到,整个计算过程并没有造成主线程的阻塞,其中,值得重点关注的是红色方框区域,线程5在请求下一个结果后,并没有等待结果返回,而是去了Main()函数中做了别的事情,等待请求的结果返回后,线程5又接着进行计算.  
+可以看到,整个计算过程并没有造成主线程的阻塞,其中,值得重点关注的是红色方框区域的`线程5`!`线程5`!`线程5`!线程5在请求下一个结果后,并没有等待结果返回,而是去了Main()函数中做了别的事情,等待请求的结果返回后,线程5又接着执行foreach中任务.  
 
 ## Client/Server的异步拉取
 
@@ -255,7 +255,19 @@ static async Task ConsumeAsyncSumSeqeunc(IAsyncEnumerable<int> sequence)
 
 ### 同步调用
 
+客户端向服务器端发送请求，客户端必须等待（客户端被阻塞），直到服务器端做出响应.
+
+<img src="https://github.com/liuzhenyulive/AsyncStreamsInCShaper8.0/raw/master/Pic/Synchronous-Data-Pull.jpg" width="407" height="566"/> 
+
+示例中Yield Return就是以这种方式执行的,所以整个过程只有一个线程即线程1在处理.
+
 ### 异步调用
+
+客户端发出数据块请求，然后继续执行其他操作。一旦数据块到达，客户端就处理接收到的数据块并询问下一个数据块，依此类推，直到达到最后一个数据块为止。这正是 Async Streams 想法的来源。
+
+<img src="https://github.com/liuzhenyulive/AsyncStreamsInCShaper8.0/raw/master/Pic/Asynchronous-Sequence-Data-Pull-large.jpg" width="1000" height="882"/> 
+
+最后一个示例就是以这种方式执行的,`线程5`询问下一个数据后并没有等待结果返回,而是去做了Main()函数中的别的事情,数据到达后,`线程5`又继续处理foreach中的任务.
 
 ## Tips
 
@@ -267,3 +279,18 @@ static async Task ConsumeAsyncSumSeqeunc(IAsyncEnumerable<int> sequence)
 
 <img src="https://github.com/liuzhenyulive/AsyncStreamsInCShaper8.0/raw/master/Pic/TheSupportToCore3.0PreView.png" width="1000" height="300"/>  
 
+总结
+
+我们已经讨论过 `Async Streams`，它是一种出色的异步拉取技术，可用于进行生成多个值的异步计算。
+
+`Async Streams` 背后的编程概念是异步拉取模型。我们请求获取序列的下一个元素，并最终得到答复。Async Streams 提供了一种处理异步数据源的绝佳方法，希望对大家能够有所帮助。  
+
+文章中涉及的所有代码已保存在我的GitHub中,请尽情享用!  
+<https://github.com/liuzhenyulive/AsyncStreamsInCShaper8.0>
+
+致谢
+
+之前一直感觉国外的大师级开发者遥不可及甚至高高在上,在遇到`Bassam Alugili`之后,我才真正感受到技术交流没有高低贵贱,正如他对我说的 `The most important thing in this world is sharing the knowledge!`
+Thank you,I will keep going!!
+
+参考文献: Async Streams in C# 8 https://www.infoq.com/articles/Async-Streams
