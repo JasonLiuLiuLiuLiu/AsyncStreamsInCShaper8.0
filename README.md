@@ -275,9 +275,13 @@ static async Task ConsumeAsyncSumSeqeunc(IAsyncEnumerable<int> sequence)
 
 <img src="https://github.com/liuzhenyulive/AsyncStreamsInCShaper8.0/raw/master/Pic/NotSupportAsyncStream2.2.png" width="1000" height="300"/> 
 
-需要安装`.net core 3.0 preview`的SDK(截至至博客撰写日期4月9日,`.net core SDK`最新版本为`3.0.100-preview3-010431`),安装好SDK后,如果你是VS 2019正式版,可能无法选择3.0的与预览版,听过只有VS 2019 Preview才支持.Net core 3.0的预览版.
+需要安装`.net core 3.0 preview`的SDK(截至至博客撰写日期4月9日,`.net core SDK`最新版本为`3.0.100-preview3-010431`),安装好SDK后,如果你是VS 2019正式版,可能无法选择`.net core 3.0`,vs 2019 正式版默认情况下没有开启对预览版`.net core 3.0 `的支持.
 
 <img src="https://github.com/liuzhenyulive/AsyncStreamsInCShaper8.0/raw/master/Pic/TheSupportToCore3.0PreView.png" width="1000" height="300"/>  
+
+根据网友补充,需要在VS 2019正式版本中需要开启`使用 .Net core SDK 预览版`,才能创建3.0的项目.  
+工具 > 选项 > 项目和解决方案 > .Net Core > 使用 .Net core SDK 预览版  
+<img src="https://github.com/liuzhenyulive/AsyncStreamsInCShaper8.0/raw/master/Pic/UsePreView.png" width="737" height="434"/> 
 
 总结
 
